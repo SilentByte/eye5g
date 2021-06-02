@@ -167,12 +167,14 @@ fn main() -> anyhow::Result<()> {
 
     let args: Args = argh::from_env();
 
+    log::info!("Loading network...");
     let network = Arc::new(Mutex::new(Eye5GNetwork::from_files(
         &args.model_cfg,
         &args.model_labels,
         &args.model_weights,
     )?));
 
+    log::info!("Starting server at {}:{}...", args.host, args.port);
     let server = TcpListener::bind(format!("{}:{}", args.host, args.port))?;
     for stream in server.incoming() {
         let args = args.clone();
