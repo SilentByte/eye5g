@@ -1,0 +1,5 @@
+.idea/
+target/
+
+test_images/
+darknet/yolov4.weights
