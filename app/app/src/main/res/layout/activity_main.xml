@@ -33,6 +33,7 @@
         android:theme="@style/Theme.Eye5G.PopupOverlay"
         app:fabCustomSize="120dp"
         app:maxImageSize="80dp"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        app:srcCompat="@drawable/ic_eye_off"
+        app:tint="@null" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
