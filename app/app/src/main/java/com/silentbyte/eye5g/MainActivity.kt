@@ -16,7 +16,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.silentbyte.eye5g.databinding.ActivityMainBinding
-import com.silentbyte.eye5g.tts.DetectionSpeaker
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
 

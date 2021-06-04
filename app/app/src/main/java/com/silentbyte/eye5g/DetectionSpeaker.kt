@@ -3,7 +3,7 @@
  * Copyright (c) 2021 SilentByte <https://silentbyte.com/>
  */
 
-package com.silentbyte.eye5g.tts
+package com.silentbyte.eye5g
 
 import android.content.Context
 import android.speech.tts.TextToSpeech
