@@ -54,9 +54,9 @@ class CameraFragment : Fragment(), TextureView.SurfaceTextureListener {
             camera?.also {
                 it.setPreviewTexture(surface)
                 it.setDisplayOrientation(90)
-                it.parameters = it.parameters.also {
-                    it.focusMode = Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO
-                    it.setPreviewSize(640, 480)
+                it.parameters = it.parameters.also { p ->
+                    p.focusMode = Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO
+                    p.setPreviewSize(640, 480)
                 }
                 it.startPreview()
             }
