@@ -16,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.silentbyte.eye5g.databinding.ActivityMainBinding
+import com.silentbyte.eye5g.tts.DetectionSpeaker
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
 
@@ -29,23 +30,31 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    private var isDetecting = false
+    private lateinit var detectionSpeaker: DetectionSpeaker
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        detectionSpeaker = DetectionSpeaker(this)
+
         binding.fab.setOnClickListener {
             if(!hasAllPermissions()) {
                 requestAllPermissions()
             } else {
-                // TODO: Open WebSocket connection.
+                if(isDetecting) {
+                    stopDetection()
+                } else {
+                    startDetection()
+                }
             }
         }
 
@@ -98,6 +107,7 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.CAMERA
         )
 
+    @Suppress("unused")
     @AfterPermissionGranted(PERMISSION_REQUEST_CODE)
     private fun onPermissionGranted() {
         if(hasAllPermissions()) {
@@ -105,5 +115,20 @@ class MainActivity : AppCompatActivity() {
         } else {
             requestAllPermissions()
         }
+    }
+
+    // TODO: Open WebSocket connection, etc.
+    private fun startDetection() {
+        binding.fab.setImageResource(R.drawable.ic_eye_on)
+
+        detectionSpeaker.start()
+        isDetecting = true
+    }
+
+    // TODO: Close WebSocket connection, etc.
+    private fun stopDetection() {
+        binding.fab.setImageResource(R.drawable.ic_eye_off)
+        detectionSpeaker.stop()
+        isDetecting = false
     }
 }

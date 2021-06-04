@@ -5,4 +5,7 @@
 
     <string name="camera_fragment_label">Eye5G</string>
     <string name="permission_rationale">This app requires permission to access the camera and establish a connection to the Internet in order to function properly.</string>
+
+    <string name="speak_detection_started">Eye5G started tracking your surroundings. Please move carefully.</string>
+    <string name="speak_detection_stopped">Eye5G is now turned off and no longer tracking your surroundings.</string>
 </resources>
