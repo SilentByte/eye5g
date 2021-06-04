@@ -1,5 +1,5 @@
 /*
- * EYE 5G SYSTEM
+ * EYE5G SYSTEM
  * Copyright (c) 2021 SilentByte <https://silentbyte.com/>
  */
 
