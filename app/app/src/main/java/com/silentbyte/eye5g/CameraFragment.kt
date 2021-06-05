@@ -84,6 +84,8 @@ class CameraFragment : Fragment(), TextureView.SurfaceTextureListener {
     }
 
     override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
-        //
+        (activity as MainActivity).onPreviewUpdated {
+            binding.previewTextureView.bitmap
+        }
     }
 }

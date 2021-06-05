@@ -6,6 +6,7 @@
 package com.silentbyte.eye5g
 
 import android.Manifest
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -18,6 +19,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.silentbyte.eye5g.databinding.ActivityMainBinding
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
+import java.io.ByteArrayOutputStream
 
 private const val TAG = "MainActivity"
 
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private var isDetecting = false
+    private lateinit var detectionWebSocket: DetectionWebSocket
     private lateinit var detectionSpeaker: DetectionSpeaker
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +46,14 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        // TODO: Make configurable.
+        detectionWebSocket = DetectionWebSocket("ws://192.168.0.80:9000").also {
+            it.setDetectionCallback { objects ->
+                Log.d(TAG, "RECEIVED DETECTION")
+                Log.d(TAG, objects.toString())
+                detectionSpeaker.addObjects(objects)
+            }
+        }
         detectionSpeaker = DetectionSpeaker(this)
 
         binding.fab.setOnClickListener {
@@ -120,6 +131,7 @@ class MainActivity : AppCompatActivity() {
     private fun startDetection() {
         binding.fab.setImageResource(R.drawable.ic_eye_on)
 
+        detectionWebSocket.open()
         detectionSpeaker.start()
         isDetecting = true
     }
@@ -127,7 +139,37 @@ class MainActivity : AppCompatActivity() {
     // TODO: Close WebSocket connection, etc.
     private fun stopDetection() {
         binding.fab.setImageResource(R.drawable.ic_eye_off)
+
+        detectionWebSocket.close()
         detectionSpeaker.stop()
         isDetecting = false
+    }
+
+    private var testDebounceLastTime = 0L
+    private var testDebounceCheckTime = 0L
+
+    // TODO: Implement properly, dynamically adjust based on priority and latency.
+    fun testDebounce(): Boolean {
+        testDebounceCheckTime = System.nanoTime()
+        if(testDebounceCheckTime > testDebounceLastTime + 1_500_000_000) {
+            testDebounceLastTime = testDebounceCheckTime
+            return true
+        } else {
+            return false
+        }
+    }
+
+    fun onPreviewUpdated(render: () -> Bitmap?) {
+        if(!isDetecting || !detectionWebSocket.isOpen || !testDebounce()) {
+            return
+        }
+
+        Log.e(TAG, "Sending frame for detection.")
+        render()?.let { bitmap ->
+            ByteArrayOutputStream().use { stream ->
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream)
+                detectionWebSocket.send(stream.toByteArray())
+            }
+        }
     }
 }

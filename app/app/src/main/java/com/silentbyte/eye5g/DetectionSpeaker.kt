@@ -8,7 +8,7 @@ package com.silentbyte.eye5g
 import android.content.Context
 import android.speech.tts.TextToSpeech
 import androidx.annotation.StringRes
-import com.silentbyte.eye5g.R
+import com.silentbyte.eye5g.models.Eye5GObject
 
 class DetectionSpeaker(private val context: Context) {
     private var isInitialized = false
@@ -27,12 +27,24 @@ class DetectionSpeaker(private val context: Context) {
     }
 
     fun start() {
+        // TODO: Add to high-priority queue.
         this.speak(R.string.speak_detection_started)
         isActive = true
     }
 
     fun stop() {
+        // TODO: Add to high-priority queue.
         this.speak(R.string.speak_detection_stopped)
         isActive = false
+    }
+
+    // TODO: Implement properly.
+    fun addObjects(objects: MutableList<Eye5GObject>) {
+        if(objects.isEmpty()) {
+            return
+        }
+
+        val labels = objects.joinToString(", ") { it.label }
+        tts.speak(labels, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 }
