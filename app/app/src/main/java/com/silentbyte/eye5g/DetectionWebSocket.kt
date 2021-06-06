@@ -86,10 +86,6 @@ class DetectionWebSocket(private val url: String) {
     }
 
     fun close() {
-        if(ws == null) {
-            throw IllegalStateException("WebSocket connection is not open and thus cannot be closed")
-        }
-
         // TODO: Check how to send end-frame to close the connection properly.
         ws?.end()
     }

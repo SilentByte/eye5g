@@ -54,7 +54,11 @@ class MainActivity : AppCompatActivity() {
                 detectionSpeaker.addObjects(objects)
             }
         }
-        detectionSpeaker = DetectionSpeaker(this)
+
+        detectionSpeaker = DetectionSpeaker(this).also {
+            it.speechRate = 1.5f
+            it.maxAge = 3.0f
+        }
 
         binding.fab.setOnClickListener {
             if(!hasAllPermissions()) {
@@ -69,6 +73,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         requestAllPermissions()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        detectionWebSocket.close()
+        detectionSpeaker.close()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -132,7 +143,7 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setImageResource(R.drawable.ic_eye_on)
 
         detectionWebSocket.open()
-        detectionSpeaker.start()
+        detectionSpeaker.speak(R.string.speak_detection_started)
         isDetecting = true
     }
 
@@ -141,7 +152,7 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setImageResource(R.drawable.ic_eye_off)
 
         detectionWebSocket.close()
-        detectionSpeaker.stop()
+        detectionSpeaker.speak(R.string.speak_detection_stopped)
         isDetecting = false
     }
 
@@ -149,18 +160,22 @@ class MainActivity : AppCompatActivity() {
     private var testDebounceCheckTime = 0L
 
     // TODO: Implement properly, dynamically adjust based on priority and latency.
-    fun testDebounce(): Boolean {
+    private fun testDebounce(): Boolean {
         testDebounceCheckTime = System.nanoTime()
-        if(testDebounceCheckTime > testDebounceLastTime + 1_500_000_000) {
+        return if(testDebounceCheckTime > testDebounceLastTime + 1_500_000_000) {
             testDebounceLastTime = testDebounceCheckTime
-            return true
+            true
         } else {
-            return false
+            false
         }
     }
 
     fun onPreviewUpdated(render: () -> Bitmap?) {
-        if(!isDetecting || !detectionWebSocket.isOpen || !testDebounce()) {
+        if(!isDetecting) {
+            return
+        }
+
+        if(!detectionWebSocket.isOpen || !testDebounce()) {
             return
         }
 
