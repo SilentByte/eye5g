@@ -94,6 +94,11 @@ class MainActivity : AppActivity(), SharedPreferences.OnSharedPreferenceChangeLi
         requestAllPermissions()
     }
 
+    override fun onPause() {
+        super.onPause()
+        stopDetection()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
 
