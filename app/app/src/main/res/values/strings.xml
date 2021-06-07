@@ -8,4 +8,329 @@
 
     <string name="speak_detection_started">Eye5G started tracking your surroundings. Please move carefully.</string>
     <string name="speak_detection_stopped">Eye5G is now turned off and no longer tracking your surroundings.</string>
+
+    <plurals name="speak_object_bus">
+        <item quantity="one">a bus</item>
+        <item quantity="other">%d buses</item>
+    </plurals>
+    <plurals name="speak_object_car">
+        <item quantity="one">a car</item>
+        <item quantity="other">%d cars</item>
+    </plurals>
+    <plurals name="speak_object_motorbike">
+        <item quantity="one">a motorbike</item>
+        <item quantity="other">%d motorbikes</item>
+    </plurals>
+    <plurals name="speak_object_train">
+        <item quantity="one">a train</item>
+        <item quantity="other">%d train</item>
+    </plurals>
+    <plurals name="speak_object_truck">
+        <item quantity="one">a truck</item>
+        <item quantity="other">%d trucks</item>
+    </plurals>
+    <plurals name="speak_object_bicycle">
+        <item quantity="one">a bicycle</item>
+        <item quantity="other">%d bicycles</item>
+    </plurals>
+    <plurals name="speak_object_dog">
+        <item quantity="one">a dog</item>
+        <item quantity="other">%d dogs</item>
+    </plurals>
+    <plurals name="speak_object_horse">
+        <item quantity="one">a horse</item>
+        <item quantity="other">%d horses</item>
+    </plurals>
+    <plurals name="speak_object_person">
+        <item quantity="one">a person</item>
+        <item quantity="other">%d persons</item>
+    </plurals>
+    <plurals name="speak_object_traffic_light">
+        <item quantity="one">a traffic light</item>
+        <item quantity="other">%d traffic lights</item>
+    </plurals>
+    <plurals name="speak_object_zebra">
+        <item quantity="one">a zebra</item>
+        <item quantity="other">%d zebras</item>
+    </plurals>
+    <plurals name="speak_object_backpack">
+        <item quantity="one">a backpack</item>
+        <item quantity="other">%d backpacks</item>
+    </plurals>
+    <plurals name="speak_object_bed">
+        <item quantity="one">a bed</item>
+        <item quantity="other">%d beds</item>
+    </plurals>
+    <plurals name="speak_object_bench">
+        <item quantity="one">a bench</item>
+        <item quantity="other">%d benches</item>
+    </plurals>
+    <plurals name="speak_object_book">
+        <item quantity="one">a book</item>
+        <item quantity="other">%d books</item>
+    </plurals>
+    <plurals name="speak_object_bottle">
+        <item quantity="one">a bottle</item>
+        <item quantity="other">%d bottles</item>
+    </plurals>
+    <plurals name="speak_object_bowl">
+        <item quantity="one">a bowl</item>
+        <item quantity="other">%d bowls</item>
+    </plurals>
+    <plurals name="speak_object_cell_phone">
+        <item quantity="one">a cell phone</item>
+        <item quantity="other">%d cell phones</item>
+    </plurals>
+    <plurals name="speak_object_chair">
+        <item quantity="one">a chair</item>
+        <item quantity="other">%d chairs</item>
+    </plurals>
+    <plurals name="speak_object_clock">
+        <item quantity="one">a clock</item>
+        <item quantity="other">%d clocks</item>
+    </plurals>
+    <plurals name="speak_object_dining_table">
+        <item quantity="one">a dining table</item>
+        <item quantity="other">%d dining tables</item>
+    </plurals>
+    <plurals name="speak_object_fire_hydrant">
+        <item quantity="one">a fire hydrant</item>
+        <item quantity="other">%d fire hydrants</item>
+    </plurals>
+    <plurals name="speak_object_hair_dryer">
+        <item quantity="one">a hair dryer</item>
+        <item quantity="other">%d hair dryers</item>
+    </plurals>
+    <plurals name="speak_object_keyboard">
+        <item quantity="one">a keyboard</item>
+        <item quantity="other">%d keyboards</item>
+    </plurals>
+    <plurals name="speak_object_laptop">
+        <item quantity="one">a laptop</item>
+        <item quantity="other">%d laptops</item>
+    </plurals>
+    <plurals name="speak_object_microwave">
+        <item quantity="one">a microwave</item>
+        <item quantity="other">%d microwaves</item>
+    </plurals>
+    <plurals name="speak_object_mouse">
+        <item quantity="one">a computer mouse</item>
+        <item quantity="other">%d computer mice</item>
+    </plurals>
+    <plurals name="speak_object_oven">
+        <item quantity="one">an oven</item>
+        <item quantity="other">%d ovens</item>
+    </plurals>
+    <plurals name="speak_object_parking_meter">
+        <item quantity="one">a parking meter</item>
+        <item quantity="other">%d parking meters</item>
+    </plurals>
+    <plurals name="speak_object_potted_plant">
+        <item quantity="one">a potted plant</item>
+        <item quantity="other">%d potted plants</item>
+    </plurals>
+    <plurals name="speak_object_refrigerator">
+        <item quantity="one">a refrigerator</item>
+        <item quantity="other">%d refrigerators</item>
+    </plurals>
+    <plurals name="speak_object_remote">
+        <item quantity="one">a remote</item>
+        <item quantity="other">%d remotes</item>
+    </plurals>
+    <plurals name="speak_object_scissors">
+        <item quantity="one">a pair of scissors</item>
+        <item quantity="other">%d pairs of scissors</item>
+    </plurals>
+    <plurals name="speak_object_sink">
+        <item quantity="one">a sink</item>
+        <item quantity="other">%d sinks</item>
+    </plurals>
+    <plurals name="speak_object_sofa">
+        <item quantity="one">a sofa</item>
+        <item quantity="other">%d sofas</item>
+    </plurals>
+    <plurals name="speak_object_sports_ball">
+        <item quantity="one">a sports ball</item>
+        <item quantity="other">%d sports balls</item>
+    </plurals>
+    <plurals name="speak_object_stop_sign">
+        <item quantity="one">a stop sign</item>
+        <item quantity="other">%d stop signs</item>
+    </plurals>
+    <plurals name="speak_object_teddy_bear">
+        <item quantity="one">a teddy bear</item>
+        <item quantity="other">%d teddy bears</item>
+    </plurals>
+    <plurals name="speak_object_toaster">
+        <item quantity="one">a toaster</item>
+        <item quantity="other">%d toasters</item>
+    </plurals>
+    <plurals name="speak_object_toilet">
+        <item quantity="one">a toilet</item>
+        <item quantity="other">%d toilets</item>
+    </plurals>
+    <plurals name="speak_object_toothbrush">
+        <item quantity="one">a toothbrush</item>
+        <item quantity="other">%d toothbrushes</item>
+    </plurals>
+    <plurals name="speak_object_tv_monitor">
+        <item quantity="one">a TV monitor</item>
+        <item quantity="other">%d TV monitors</item>
+    </plurals>
+    <plurals name="speak_object_vase">
+        <item quantity="one">a vase</item>
+        <item quantity="other">%d vases</item>
+    </plurals>
+    <plurals name="speak_object_aeroplane">
+        <item quantity="one">a aeroplane</item>
+        <item quantity="other">%d aeroplanes</item>
+    </plurals>
+    <plurals name="speak_object_apple">
+        <item quantity="one">an apple</item>
+        <item quantity="other">%d apples</item>
+    </plurals>
+    <plurals name="speak_object_banana">
+        <item quantity="one">a banana</item>
+        <item quantity="other">%d bananas</item>
+    </plurals>
+    <plurals name="speak_object_baseball_bat">
+        <item quantity="one">a baseball bat</item>
+        <item quantity="other">%d baseball bats</item>
+    </plurals>
+    <plurals name="speak_object_baseball_glove">
+        <item quantity="one">a baseball glove</item>
+        <item quantity="other">%d baseball gloves</item>
+    </plurals>
+    <plurals name="speak_object_bear">
+        <item quantity="one">a bear</item>
+        <item quantity="other">%d bears</item>
+    </plurals>
+    <plurals name="speak_object_bird">
+        <item quantity="one">a bird</item>
+        <item quantity="other">%d birds</item>
+    </plurals>
+    <plurals name="speak_object_boat">
+        <item quantity="one">a boat</item>
+        <item quantity="other">%d boats</item>
+    </plurals>
+    <plurals name="speak_object_broccoli">
+        <item quantity="one">a head of broccoli</item>
+        <item quantity="other">%d heads of broccoli</item>
+    </plurals>
+    <plurals name="speak_object_cake">
+        <item quantity="one">a cake</item>
+        <item quantity="other">%d cakes</item>
+    </plurals>
+    <plurals name="speak_object_carrot">
+        <item quantity="one">a carrot</item>
+        <item quantity="other">%d carrots</item>
+    </plurals>
+    <plurals name="speak_object_cat">
+        <item quantity="one">a cat</item>
+        <item quantity="other">%d cats</item>
+    </plurals>
+    <plurals name="speak_object_cow">
+        <item quantity="one">a cow</item>
+        <item quantity="other">%d cows</item>
+    </plurals>
+    <plurals name="speak_object_cup">
+        <item quantity="one">a cup</item>
+        <item quantity="other">%d cups</item>
+    </plurals>
+    <plurals name="speak_object_donut">
+        <item quantity="one">a donut</item>
+        <item quantity="other">%d donuts</item>
+    </plurals>
+    <plurals name="speak_object_elephant">
+        <item quantity="one">an elephant</item>
+        <item quantity="other">%d elephants</item>
+    </plurals>
+    <plurals name="speak_object_fork">
+        <item quantity="one">a fork</item>
+        <item quantity="other">%d forks</item>
+    </plurals>
+    <plurals name="speak_object_frisbee">
+        <item quantity="one">a frisbee</item>
+        <item quantity="other">%d frisbees</item>
+    </plurals>
+    <plurals name="speak_object_giraffe">
+        <item quantity="one">a giraffe</item>
+        <item quantity="other">%d giraffes</item>
+    </plurals>
+    <plurals name="speak_object_handbag">
+        <item quantity="one">a handbag</item>
+        <item quantity="other">%d handbags</item>
+    </plurals>
+    <plurals name="speak_object_hot_dog">
+        <item quantity="one">a hot dog</item>
+        <item quantity="other">%d hot dogs</item>
+    </plurals>
+    <plurals name="speak_object_kite">
+        <item quantity="one">a kite</item>
+        <item quantity="other">%d kites</item>
+    </plurals>
+    <plurals name="speak_object_knife">
+        <item quantity="one">a knife</item>
+        <item quantity="other">%d knives</item>
+    </plurals>
+    <plurals name="speak_object_orange">
+        <item quantity="one">a orange</item>
+        <item quantity="other">%d oranges</item>
+    </plurals>
+    <plurals name="speak_object_pizza">
+        <item quantity="one">a pizza</item>
+        <item quantity="other">%d pizzas</item>
+    </plurals>
+    <plurals name="speak_object_sandwich">
+        <item quantity="one">a sandwich</item>
+        <item quantity="other">%d sandwiches</item>
+    </plurals>
+    <plurals name="speak_object_sheep">
+        <item quantity="one">a sheep</item>
+        <item quantity="other">%d sheep</item>
+    </plurals>
+    <plurals name="speak_object_skateboard">
+        <item quantity="one">a skateboard</item>
+        <item quantity="other">%d skateboards</item>
+    </plurals>
+    <plurals name="speak_object_skis">
+        <item quantity="one">a pair of skis</item>
+        <item quantity="other">%d pairs of skis</item>
+    </plurals>
+    <plurals name="speak_object_snowboard">
+        <item quantity="one">a snowboard</item>
+        <item quantity="other">%d snowboards</item>
+    </plurals>
+    <plurals name="speak_object_spoon">
+        <item quantity="one">a spoon</item>
+        <item quantity="other">%d spoons</item>
+    </plurals>
+    <plurals name="speak_object_suitcase">
+        <item quantity="one">a suitcase</item>
+        <item quantity="other">%d suitcases</item>
+    </plurals>
+    <plurals name="speak_object_surfboard">
+        <item quantity="one">a surfboard</item>
+        <item quantity="other">%d surfboards</item>
+    </plurals>
+    <plurals name="speak_object_tennis_racket">
+        <item quantity="one">a tennis racket</item>
+        <item quantity="other">%d tennis rackets</item>
+    </plurals>
+    <plurals name="speak_object_tie">
+        <item quantity="one">a tie</item>
+        <item quantity="other">%d ties</item>
+    </plurals>
+    <plurals name="speak_object_umbrella">
+        <item quantity="one">a umbrella</item>
+        <item quantity="other">%d umbrellas</item>
+    </plurals>
+    <plurals name="speak_object_wine_glass">
+        <item quantity="one">a wine glass</item>
+        <item quantity="other">%d wine glasses</item>
+    </plurals>
+    <plurals name="speak_object_unknown">
+        <item quantity="one">an unknown object</item>
+        <item quantity="other">%d unknown objects</item>
+    </plurals>
 </resources>

@@ -47,7 +47,7 @@ class DetectionSpeaker(private val context: Context) : Closeable {
         isInitialized = status == TextToSpeech.SUCCESS
     }
 
-    fun speak(text: String) {
+    private fun speak(text: String) {
         Log.i(TAG, "Speaking: $text")
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
@@ -85,8 +85,14 @@ class DetectionSpeaker(private val context: Context) : Closeable {
             }
         }
 
-        // TODO: Do proper i18n and pluralization.
-        val text = announceGroup.entries.joinToString(", ") { "${it.value.size} ${it.key}" }
+        if(announceGroup.isEmpty()) {
+            return
+        }
+
+        val text = announceGroup.entries.joinToString(", ") {
+            context.resources.getQuantityString(it.value[0].nameResId, it.value.size, it.value.size)
+        }
+
         speak(text)
     }
 

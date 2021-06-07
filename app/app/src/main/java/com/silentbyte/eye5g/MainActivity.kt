@@ -162,7 +162,7 @@ class MainActivity : AppCompatActivity() {
     // TODO: Implement properly, dynamically adjust based on priority and latency.
     private fun testDebounce(): Boolean {
         testDebounceCheckTime = System.nanoTime()
-        return if(testDebounceCheckTime > testDebounceLastTime + 1_500_000_000) {
+        return if(testDebounceCheckTime > testDebounceLastTime + 200_000_000) {
             testDebounceLastTime = testDebounceCheckTime
             true
         } else {
