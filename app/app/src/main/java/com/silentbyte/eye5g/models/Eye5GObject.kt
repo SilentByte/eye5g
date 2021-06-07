@@ -5,6 +5,8 @@
 
 package com.silentbyte.eye5g.models
 
+import android.graphics.Rect
+import android.graphics.RectF
 import androidx.annotation.PluralsRes
 import com.silentbyte.eye5g.R
 
@@ -99,11 +101,30 @@ private val labelMap = mapOf(
     "wine glass" to LabelDetail(20, R.plurals.speak_object_wine_glass),
 )
 
+enum class Eye5GObjectLocation {
+    Left,
+    Center,
+    Right,
+}
+
 data class Eye5GObject(
     val label: String,
     val probability: Float,
     val bbox: BBox,
 ) {
+    companion object {
+        const val CENTER_WIDTH = 0.6f
+
+        fun intersectionArea(first: RectF, second: RectF): Float {
+            val intersection = RectF(first)
+            return if(intersection.intersect(second)) {
+                intersection.width() * intersection.height()
+            } else {
+                0.0f
+            }
+        }
+    }
+
     private val timestamp = System.nanoTime()
 
     val priority = labelMap[label]?.priority ?: 0
@@ -111,6 +132,27 @@ data class Eye5GObject(
     @PluralsRes
     val nameResId = labelMap[label]?.nameResId ?: R.plurals.speak_object_unknown
 
+    val location: Eye5GObjectLocation
+
     val age: Float
         get() = (System.nanoTime() - timestamp).toFloat() / 1_000_000_000
+
+    init {
+        val objectRect = RectF(
+            bbox.x - bbox.width / 2.0f,
+            bbox.y - bbox.height / 2.0f,
+            bbox.x + bbox.width / 2.0f,
+            bbox.y + bbox.height / 2.0f,
+        )
+
+        val leftRect = RectF(0.0f, 0.0f, CENTER_WIDTH / 2.0f, 1.0f)
+        val centerRect = RectF(CENTER_WIDTH / 2.0f, 0.0f, CENTER_WIDTH + CENTER_WIDTH / 2.0f, 1.0f)
+        val rightRect = RectF(CENTER_WIDTH + CENTER_WIDTH / 2.0f, 0.0f, 1.0f, 1.0f)
+
+        location = arrayOf(
+            Pair(Eye5GObjectLocation.Left, intersectionArea(leftRect, objectRect)),
+            Pair(Eye5GObjectLocation.Center, intersectionArea(centerRect, objectRect)),
+            Pair(Eye5GObjectLocation.Right, intersectionArea(rightRect, objectRect)),
+        ).maxByOrNull { it.second }!!.first
+    }
 }

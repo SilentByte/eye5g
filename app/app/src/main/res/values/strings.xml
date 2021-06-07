@@ -20,6 +20,10 @@
     <string name="speak_detection_started">Eye5G started tracking your surroundings. Please move carefully.</string>
     <string name="speak_detection_stopped">Eye5G is now turned off and no longer tracking your surroundings.</string>
 
+    <string name="speak_location_left">on the left</string>
+    <string name="speak_location_center">in the center</string>
+    <string name="speak_location_right">on the right</string>
+
     <plurals name="speak_object_bus">
         <item quantity="one">a bus</item>
         <item quantity="other">%d buses</item>

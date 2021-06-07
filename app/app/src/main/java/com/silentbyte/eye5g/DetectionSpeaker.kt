@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.annotation.StringRes
 import com.silentbyte.eye5g.models.Eye5GObject
+import com.silentbyte.eye5g.models.Eye5GObjectLocation
 import java.io.Closeable
 import java.util.*
 import kotlin.collections.ArrayList
@@ -40,6 +41,11 @@ class DetectionSpeaker(private val context: Context) : Closeable {
             field = value.coerceAtLeast(0.0f)
         }
 
+    var maxObjectCount = 8
+        set(value) {
+            field = value.coerceAtLeast(1)
+        }
+
     var speechRate = 1.0f
     var locale: Locale? = null
 
@@ -67,24 +73,11 @@ class DetectionSpeaker(private val context: Context) : Closeable {
         speak(context.getString(resId, formatArgs))
     }
 
-    fun addObjects(objects: Iterable<Eye5GObject>) {
-        if(tts.isSpeaking) {
-            return
-        }
-
-        val originalGroup = queue
-            .filter { it.age < maxAge }
-            .sortedWith { lhs, rhs -> objectComparator(lhs, rhs) }
-            .groupBy { it.label }
-
-        val group = objects
-            .filter { it.age < maxAge }
-            .sortedWith { lhs, rhs -> objectComparator(lhs, rhs) }
-            .groupBy { it.label }
-
-        queue.clear()
-        queue.addAll(objects)
-
+    private fun announce(
+        group: Map<String, List<Eye5GObject>>,
+        originalGroup: Map<String, List<Eye5GObject>>,
+        location: Eye5GObjectLocation,
+    ) {
         val announceGroup = LinkedHashMap<String, MutableList<Eye5GObject>>()
         for(g in group) {
             // If a new object type (with label as the key) has been detected,
@@ -101,11 +94,52 @@ class DetectionSpeaker(private val context: Context) : Closeable {
             return
         }
 
-        val text = announceGroup.entries.joinToString(", ") {
+        val objectText = announceGroup.entries.joinToString(", ") {
             context.resources.getQuantityString(it.value[0].nameResId, it.value.size, it.value.size)
         }
 
-        speak(text)
+        val locationText = when(location) {
+            Eye5GObjectLocation.Left -> context.getString(R.string.speak_location_left)
+            Eye5GObjectLocation.Center -> context.getString(R.string.speak_location_center)
+            Eye5GObjectLocation.Right -> context.getString(R.string.speak_location_right)
+        }
+
+        speak("$objectText, $locationText")
+    }
+
+    fun addObjects(objects: Iterable<Eye5GObject>) {
+        if(tts.isSpeaking) {
+            return
+        }
+
+        val originalObjects = queue
+            .filter { it.age < maxAge }
+            .sortedWith { lhs, rhs -> objectComparator(lhs, rhs) }
+
+        val filteredObjects = objects
+            .filter { it.age < maxAge }
+            .sortedWith { lhs, rhs -> objectComparator(lhs, rhs) }
+            .take(maxObjectCount)
+
+
+        for(location in arrayOf(
+            Eye5GObjectLocation.Center,
+            Eye5GObjectLocation.Left,
+            Eye5GObjectLocation.Right,
+        )) {
+            announce(
+                filteredObjects
+                    .filter { it.location == location }
+                    .groupBy { it.label },
+                originalObjects
+                    .filter { it.location == location }
+                    .groupBy { it.label },
+                location,
+            )
+        }
+
+        queue.clear()
+        queue.addAll(objects)
     }
 
     override fun close() {

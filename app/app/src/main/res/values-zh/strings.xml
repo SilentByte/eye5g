@@ -20,6 +20,10 @@
     <string name="speak_detection_started">Eye5G 开始跟踪您的周围环境。 请小心移动。</string>
     <string name="speak_detection_stopped">Eye5G 现在已关闭，不再跟踪您的周围环境。</string>
 
+    <string name="speak_location_left">在左边</string>
+    <string name="speak_location_center">在中心</string>
+    <string name="speak_location_right">在右边</string>
+
     <plurals name="speak_object_bus">
         <item quantity="other">%d 辆公交车</item>
     </plurals>
