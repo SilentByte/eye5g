@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -23,7 +22,7 @@ import java.io.ByteArrayOutputStream
 
 private const val TAG = "MainActivity"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppActivity() {
     companion object {
         const val PERMISSION_REQUEST_CODE = 1
     }
@@ -58,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         detectionSpeaker = DetectionSpeaker(this).also {
             it.speechRate = 1.5f
             it.maxAge = 3.0f
+            it.locale = appLocale
         }
 
         binding.fab.setOnClickListener {

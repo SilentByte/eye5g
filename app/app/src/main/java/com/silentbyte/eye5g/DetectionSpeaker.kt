@@ -11,6 +11,9 @@ import android.util.Log
 import androidx.annotation.StringRes
 import com.silentbyte.eye5g.models.Eye5GObject
 import java.io.Closeable
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.LinkedHashMap
 
 private const val TAG = "DetectionSpeaker"
 
@@ -38,17 +41,25 @@ class DetectionSpeaker(private val context: Context) : Closeable {
         }
 
     var speechRate = 1.0f
-        set(value) {
-            tts.setSpeechRate(value)
-            field = value
-        }
+    var locale: Locale? = null
 
     private val tts = TextToSpeech(context) { status ->
         isInitialized = status == TextToSpeech.SUCCESS
     }
 
+    private fun updateConfig() {
+        if(!isInitialized) {
+            return
+        }
+
+        tts.setSpeechRate(speechRate)
+        locale?.let { tts.language = it }
+    }
+
     private fun speak(text: String) {
         Log.i(TAG, "Speaking: $text")
+
+        updateConfig()
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 

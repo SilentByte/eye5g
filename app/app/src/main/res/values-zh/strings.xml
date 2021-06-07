@@ -1,0 +1,255 @@
+<resources>
+    <string name="app_name">Eye5G</string>
+    <string name="action_settings">设置</string>
+    <string name="action_start">开始 Eye5G</string>
+
+    <string name="camera_fragment_label">Eye5G</string>
+    <string name="permission_rationale">此应用程序需要获得访问相机的权限并建立与 Internet 的连接才能正常运行。</string>
+
+    <string name="speak_detection_started">Eye5G 开始跟踪您的周围环境。 请小心移动。</string>
+    <string name="speak_detection_stopped">Eye5G 现在已关闭，不再跟踪您的周围环境。</string>
+
+    <plurals name="speak_object_bus">
+        <item quantity="other">%d 辆公交车</item>
+    </plurals>
+    <plurals name="speak_object_car">
+        <item quantity="other">%d 辆汽车</item>
+    </plurals>
+    <plurals name="speak_object_motorbike">
+        <item quantity="other">%d 辆摩托车</item>
+    </plurals>
+    <plurals name="speak_object_train">
+        <item quantity="other">%d 辆火车</item>
+    </plurals>
+    <plurals name="speak_object_truck">
+        <item quantity="other">%d 辆卡车</item>
+    </plurals>
+    <plurals name="speak_object_bicycle">
+        <item quantity="other">%d 辆自行车</item>
+    </plurals>
+    <plurals name="speak_object_dog">
+        <item quantity="other">%d 只狗</item>
+    </plurals>
+    <plurals name="speak_object_horse">
+        <item quantity="other">%d 匹马</item>
+    </plurals>
+    <plurals name="speak_object_person">
+        <item quantity="other">%d 个人</item>
+    </plurals>
+    <plurals name="speak_object_traffic_light">
+        <item quantity="other">%d 个红绿灯</item>
+    </plurals>
+    <plurals name="speak_object_zebra">
+        <item quantity="other">%d 只斑马</item>
+    </plurals>
+    <plurals name="speak_object_backpack">
+        <item quantity="other">%d 个背包</item>
+    </plurals>
+    <plurals name="speak_object_bed">
+        <item quantity="other">%d 张床</item>
+    </plurals>
+    <plurals name="speak_object_bench">
+        <item quantity="other">%d 个长椅</item>
+    </plurals>
+    <plurals name="speak_object_book">
+        <item quantity="other">%d 本书</item>
+    </plurals>
+    <plurals name="speak_object_bottle">
+        <item quantity="other">%d 个瓶子</item>
+    </plurals>
+    <plurals name="speak_object_bowl">
+        <item quantity="other">%d 个碗</item>
+    </plurals>
+    <plurals name="speak_object_cell_phone">
+        <item quantity="other">%d 个手机</item>
+    </plurals>
+    <plurals name="speak_object_chair">
+        <item quantity="other">%d 把椅子</item>
+    </plurals>
+    <plurals name="speak_object_clock">
+        <item quantity="other">%d 个钟表</item>
+    </plurals>
+    <plurals name="speak_object_dining_table">
+        <item quantity="other">%d 张餐桌</item>
+    </plurals>
+    <plurals name="speak_object_fire_hydrant">
+        <item quantity="other">%d 个消防栓</item>
+    </plurals>
+    <plurals name="speak_object_hair_dryer">
+        <item quantity="other">%d 个吹风筒</item>
+    </plurals>
+    <plurals name="speak_object_keyboard">
+        <item quantity="other">%d 个键盘</item>
+    </plurals>
+    <plurals name="speak_object_laptop">
+        <item quantity="other">%d 个笔记本电脑</item>
+    </plurals>
+    <plurals name="speak_object_microwave">
+        <item quantity="other">%d 个微波炉</item>
+    </plurals>
+    <plurals name="speak_object_mouse">
+        <item quantity="other">%d 个鼠标</item>
+    </plurals>
+    <plurals name="speak_object_oven">
+        <item quantity="other">%d 个烤箱</item>
+    </plurals>
+    <plurals name="speak_object_parking_meter">
+        <item quantity="other">%d 个停车计时器</item>
+    </plurals>
+    <plurals name="speak_object_potted_plant">
+        <item quantity="other">%d 盆盆栽植物</item>
+    </plurals>
+    <plurals name="speak_object_refrigerator">
+        <item quantity="other">%d 台冰箱</item>
+    </plurals>
+    <plurals name="speak_object_remote">
+        <item quantity="other">%d 个遥控器</item>
+    </plurals>
+    <plurals name="speak_object_scissors">
+        <item quantity="other">%d 把剪刀</item>
+    </plurals>
+    <plurals name="speak_object_sink">
+        <item quantity="other">%d 个水槽</item>
+    </plurals>
+    <plurals name="speak_object_sofa">
+        <item quantity="other">%d 个沙发</item>
+    </plurals>
+    <plurals name="speak_object_sports_ball">
+        <item quantity="other">%d 个球</item>
+    </plurals>
+    <plurals name="speak_object_stop_sign">
+        <item quantity="other">%d 个停车标志</item>
+    </plurals>
+    <plurals name="speak_object_teddy_bear">
+        <item quantity="other">%d 个泰迪熊</item>
+    </plurals>
+    <plurals name="speak_object_toaster">
+        <item quantity="other">%d 个烤面包机</item>
+    </plurals>
+    <plurals name="speak_object_toilet">
+        <item quantity="other">%d 个卫生间</item>
+    </plurals>
+    <plurals name="speak_object_toothbrush">
+        <item quantity="other">%d 个牙刷</item>
+    </plurals>
+    <plurals name="speak_object_tv_monitor">
+        <item quantity="other">%d 个电视监控</item>
+    </plurals>
+    <plurals name="speak_object_vase">
+        <item quantity="other">%d 个花瓶</item>
+    </plurals>
+    <plurals name="speak_object_aeroplane">
+        <item quantity="other">%d 架飞机</item>
+    </plurals>
+    <plurals name="speak_object_apple">
+        <item quantity="other">%d 个苹果</item>
+    </plurals>
+    <plurals name="speak_object_banana">
+        <item quantity="other">%d 个香蕉</item>
+    </plurals>
+    <plurals name="speak_object_baseball_bat">
+        <item quantity="other">%d 个棒球棒</item>
+    </plurals>
+    <plurals name="speak_object_baseball_glove">
+        <item quantity="other">%d 只棒球手套</item>
+    </plurals>
+    <plurals name="speak_object_bear">
+        <item quantity="other">%d 只熊</item>
+    </plurals>
+    <plurals name="speak_object_bird">
+        <item quantity="other">%d 只鸟</item>
+    </plurals>
+    <plurals name="speak_object_boat">
+        <item quantity="other">%d 艘船</item>
+    </plurals>
+    <plurals name="speak_object_broccoli">
+        <item quantity="other">%d 个西兰花</item>
+    </plurals>
+    <plurals name="speak_object_cake">
+        <item quantity="other">%d 块蛋糕</item>
+    </plurals>
+    <plurals name="speak_object_carrot">
+        <item quantity="other">%d 根胡萝卜</item>
+    </plurals>
+    <plurals name="speak_object_cat">
+        <item quantity="other">%d 只猫</item>
+    </plurals>
+    <plurals name="speak_object_cow">
+        <item quantity="other">%d 头牛</item>
+    </plurals>
+    <plurals name="speak_object_cup">
+        <item quantity="other">%d 个杯子</item>
+    </plurals>
+    <plurals name="speak_object_donut">
+        <item quantity="other">%d 个甜甜圈</item>
+    </plurals>
+    <plurals name="speak_object_elephant">
+        <item quantity="other">%d 头象</item>
+    </plurals>
+    <plurals name="speak_object_fork">
+        <item quantity="other">%d 把叉子</item>
+    </plurals>
+    <plurals name="speak_object_frisbee">
+        <item quantity="other">%d 个飞盘</item>
+    </plurals>
+    <plurals name="speak_object_giraffe">
+        <item quantity="other">%d 只长颈鹿</item>
+    </plurals>
+    <plurals name="speak_object_handbag">
+        <item quantity="other">%d 个包</item>
+    </plurals>
+    <plurals name="speak_object_hot_dog">
+        <item quantity="other">%d 个热狗</item>
+    </plurals>
+    <plurals name="speak_object_kite">
+        <item quantity="other">%d 个风筝</item>
+    </plurals>
+    <plurals name="speak_object_knife">
+        <item quantity="other">%d 把刀子</item>
+    </plurals>
+    <plurals name="speak_object_orange">
+        <item quantity="other">%d 个橙子</item>
+    </plurals>
+    <plurals name="speak_object_pizza">
+        <item quantity="other">%d 个披萨</item>
+    </plurals>
+    <plurals name="speak_object_sandwich">
+        <item quantity="other">%d 个三明治</item>
+    </plurals>
+    <plurals name="speak_object_sheep">
+        <item quantity="other">%d 只羊</item>
+    </plurals>
+    <plurals name="speak_object_skateboard">
+        <item quantity="other">%d 个溜冰板</item>
+    </plurals>
+    <plurals name="speak_object_skis">
+        <item quantity="other">%d 双滑雪橇</item>
+    </plurals>
+    <plurals name="speak_object_snowboard">
+        <item quantity="other">%d 个滑雪板</item>
+    </plurals>
+    <plurals name="speak_object_spoon">
+        <item quantity="other">%d 把勺子</item>
+    </plurals>
+    <plurals name="speak_object_suitcase">
+        <item quantity="other">%d 个手提箱</item>
+    </plurals>
+    <plurals name="speak_object_surfboard">
+        <item quantity="other">%d 个冲浪板</item>
+    </plurals>
+    <plurals name="speak_object_tennis_racket">
+        <item quantity="other">%d 个网球拍</item>
+    </plurals>
+    <plurals name="speak_object_tie">
+        <item quantity="other">%d 条领带</item>
+    </plurals>
+    <plurals name="speak_object_umbrella">
+        <item quantity="other">%d 把伞</item>
+    </plurals>
+    <plurals name="speak_object_wine_glass">
+        <item quantity="other">%d 个酒杯</item>
+    </plurals>
+    <plurals name="speak_object_unknown">
+        <item quantity="other">%d 个不明确物体</item>
+    </plurals>
+</resources>
