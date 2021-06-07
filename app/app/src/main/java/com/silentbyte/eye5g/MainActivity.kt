@@ -6,6 +6,8 @@
 package com.silentbyte.eye5g
 
 import android.Manifest
+import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +17,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.preference.PreferenceManager
 import com.silentbyte.eye5g.databinding.ActivityMainBinding
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
@@ -22,7 +25,7 @@ import java.io.ByteArrayOutputStream
 
 private const val TAG = "MainActivity"
 
-class MainActivity : AppActivity() {
+class MainActivity : AppActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
     companion object {
         const val PERMISSION_REQUEST_CODE = 1
     }
@@ -45,8 +48,10 @@ class MainActivity : AppActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        // TODO: Make configurable.
-        detectionWebSocket = DetectionWebSocket("ws://192.168.0.80:9000").also {
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .registerOnSharedPreferenceChangeListener(this)
+
+        detectionWebSocket = DetectionWebSocket().also {
             it.setDetectionCallback { objects ->
                 Log.d(TAG, "RECEIVED DETECTION")
                 Log.d(TAG, objects.toString())
@@ -54,11 +59,7 @@ class MainActivity : AppActivity() {
             }
         }
 
-        detectionSpeaker = DetectionSpeaker(this).also {
-            it.speechRate = 1.5f
-            it.maxAge = 3.0f
-            it.locale = appLocale
-        }
+        detectionSpeaker = DetectionSpeaker(this)
 
         binding.fab.setOnClickListener {
             if(!hasAllPermissions()) {
@@ -72,6 +73,7 @@ class MainActivity : AppActivity() {
             }
         }
 
+        loadStateFromAppPreferences(getAppPreferences())
         requestAllPermissions()
     }
 
@@ -89,7 +91,10 @@ class MainActivity : AppActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings -> {
+                showSettingsActivity()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -107,6 +112,26 @@ class MainActivity : AppActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    override fun onSharedPreferenceChanged(preferences: SharedPreferences?, key: String?) {
+        loadStateFromAppPreferences(getAppPreferences(preferences))
+
+        if(key == "locale") {
+            recreate()
+        }
+    }
+
+    private fun getAppPreferences(preferences: SharedPreferences? = null): AppPreferences {
+        return if(preferences == null) {
+            AppPreferences(PreferenceManager.getDefaultSharedPreferences(this))
+        } else {
+            AppPreferences(preferences)
+        }
+    }
+
+    private fun showSettingsActivity() {
+        startActivityForResult(Intent(this, SettingsActivity::class.java), 0)
     }
 
     private fun requestAllPermissions() {
@@ -128,6 +153,19 @@ class MainActivity : AppActivity() {
             Manifest.permission.CAMERA
         )
 
+    private fun loadStateFromAppPreferences(preferences: AppPreferences) {
+        preferences.also { p ->
+            appLocale = p.locale
+            detectionSpeaker.also {
+                it.locale = p.locale
+                it.speechRate = p.speechRate
+                it.maxAge = 3.0f
+            }
+        }
+
+        updateAppConfig()
+    }
+
     @Suppress("unused")
     @AfterPermissionGranted(PERMISSION_REQUEST_CODE)
     private fun onPermissionGranted() {
@@ -138,16 +176,14 @@ class MainActivity : AppActivity() {
         }
     }
 
-    // TODO: Open WebSocket connection, etc.
     private fun startDetection() {
         binding.fab.setImageResource(R.drawable.ic_eye_on)
 
-        detectionWebSocket.open()
+        detectionWebSocket.open(getAppPreferences().serviceUrl)
         detectionSpeaker.speak(R.string.speak_detection_started)
         isDetecting = true
     }
 
-    // TODO: Close WebSocket connection, etc.
     private fun stopDetection() {
         binding.fab.setImageResource(R.drawable.ic_eye_off)
 

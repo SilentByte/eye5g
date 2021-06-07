@@ -15,15 +15,21 @@ open class AppActivity : AppCompatActivity() {
     }
 
     init {
-        updateAppConfig()
-    }
-
-    fun updateAppConfig() {
         appLocale?.let { locale ->
             Locale.setDefault(locale)
             Configuration().also { config ->
                 config.setLocale(locale)
                 applyOverrideConfiguration(config)
+            }
+        }
+    }
+
+    fun updateAppConfig() {
+        appLocale?.let { locale ->
+            Locale.setDefault(locale)
+            resources.configuration.also { config ->
+                config.setLocale(locale)
+                resources.updateConfiguration(config, resources.displayMetrics)
             }
         }
     }

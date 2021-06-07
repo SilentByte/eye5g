@@ -1,0 +1,27 @@
+<resources>
+    <string-array name="settings_accessibility_locale_entries">
+        <item>Default</item>
+        <item>English</item>
+        <item>中文（中国）</item>
+    </string-array>
+    <string-array name="settings_accessibility_locale_values">
+        <item>default</item>
+        <item>en</item>
+        <item>zh</item>
+    </string-array>
+
+    <string-array name="settings_accessibility_speech_rate_entries">
+        <item>Very Fast</item>
+        <item>Fast</item>
+        <item>Normal</item>
+        <item>Slow</item>
+        <item>Very Slow</item>
+    </string-array>
+    <string-array name="settings_accessibility_speech_rate_values">
+        <item>very_fast</item>
+        <item>fast</item>
+        <item>normal</item>
+        <item>slow</item>
+        <item>very_slow</item>
+    </string-array>
+</resources>

@@ -17,7 +17,7 @@ private const val TAG = "DetectionWebSocket"
 
 typealias DetectionCallback = (objects: MutableList<Eye5GObject>) -> Unit
 
-class DetectionWebSocket(private val url: String) {
+class DetectionWebSocket {
     private var ws: WebSocket? = null
     private var detectionCallback: DetectionCallback? = null
 
@@ -55,7 +55,7 @@ class DetectionWebSocket(private val url: String) {
         }
     }
 
-    fun open() {
+    fun open(url: String) {
         if(ws != null) {
             throw IllegalStateException("WebSocket connection has already been opened")
         }

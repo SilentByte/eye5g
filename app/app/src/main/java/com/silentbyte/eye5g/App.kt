@@ -6,19 +6,15 @@
 package com.silentbyte.eye5g
 
 import android.app.Application
-import android.preference.PreferenceManager
-import java.util.*
+import androidx.preference.PreferenceManager
 
 @Suppress("unused")
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        PreferenceManager.getDefaultSharedPreferences(this).getString("locale", null)?.let {
-            AppActivity.appLocale = Locale(it)
+        AppPreferences(PreferenceManager.getDefaultSharedPreferences(this)).also {
+            AppActivity.appLocale = it.locale
         }
-
-        // TODO: Add app setting.
-        // AppActivity.appLocale = Locale("zh")
     }
 }

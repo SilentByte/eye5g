@@ -3,6 +3,15 @@
     <string name="action_settings">Settings</string>
     <string name="action_start">Start Eye5G</string>
 
+    <string name="settings_title">Settings</string>
+
+    <string name="settings_connection_header">Connection</string>
+    <string name="settings_connection_service_url">Service URL</string>
+
+    <string name="settings_accessibility_header">Accessibility</string>
+    <string name="settings_accessibility_locale">Language</string>
+    <string name="settings_accessibility_speech_rate">Speech Rate</string>
+
     <string name="camera_fragment_label">Eye5G</string>
     <string name="permission_rationale">This app requires permission to access the camera and establish a connection to the Internet in order to function properly.</string>
 
