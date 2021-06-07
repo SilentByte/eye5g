@@ -60,7 +60,7 @@ class DetectionSpeaker(private val context: Context) : Closeable {
         Log.i(TAG, "Speaking: $text")
 
         updateConfig()
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+        tts.speak(text, TextToSpeech.QUEUE_ADD, null, null)
     }
 
     fun speak(@StringRes resId: Int, vararg formatArgs: Any) {
@@ -74,6 +74,7 @@ class DetectionSpeaker(private val context: Context) : Closeable {
 
         val originalGroup = queue
             .filter { it.age < maxAge }
+            .sortedWith { lhs, rhs -> objectComparator(lhs, rhs) }
             .groupBy { it.label }
 
         val group = objects
@@ -82,6 +83,7 @@ class DetectionSpeaker(private val context: Context) : Closeable {
             .groupBy { it.label }
 
         queue.clear()
+        queue.addAll(objects)
 
         val announceGroup = LinkedHashMap<String, MutableList<Eye5GObject>>()
         for(g in group) {
@@ -89,7 +91,6 @@ class DetectionSpeaker(private val context: Context) : Closeable {
             // or if the number of objects of the same type has changed,
             // schedule that group for announcement.
             if(g.value.size != originalGroup[g.key]?.size) {
-                queue.addAll(g.value)
                 announceGroup.computeIfAbsent(g.key) {
                     mutableListOf()
                 }.addAll(g.value)

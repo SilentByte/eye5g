@@ -52,9 +52,26 @@ class MainActivity : AppActivity(), SharedPreferences.OnSharedPreferenceChangeLi
             .registerOnSharedPreferenceChangeListener(this)
 
         detectionWebSocket = DetectionWebSocket().also {
-            it.setDetectionCallback { objects ->
-                Log.d(TAG, "RECEIVED DETECTION")
-                Log.d(TAG, objects.toString())
+            it.connectionOpenedCallback = {
+                detectionSpeaker.speak(R.string.speak_detection_started)
+            }
+
+            it.connectionClosedCallback = {
+                if(isDetecting) {
+                    detectionSpeaker.speak(R.string.speak_reconnecting)
+                    detectionWebSocket.open(getAppPreferences().serviceUrl)
+                } else {
+                    detectionSpeaker.speak(R.string.speak_detection_stopped)
+                }
+            }
+
+            it.connectionErrorCallback = {
+                detectionSpeaker.speak(R.string.speak_connection_error)
+                stopDetection()
+            }
+
+            it.detectionCallback = { objects ->
+                Log.d(TAG, "Detection Received: $objects")
                 detectionSpeaker.addObjects(objects)
             }
         }
@@ -180,16 +197,14 @@ class MainActivity : AppActivity(), SharedPreferences.OnSharedPreferenceChangeLi
         binding.fab.setImageResource(R.drawable.ic_eye_on)
 
         detectionWebSocket.open(getAppPreferences().serviceUrl)
-        detectionSpeaker.speak(R.string.speak_detection_started)
         isDetecting = true
     }
 
     private fun stopDetection() {
         binding.fab.setImageResource(R.drawable.ic_eye_off)
 
-        detectionWebSocket.close()
-        detectionSpeaker.speak(R.string.speak_detection_stopped)
         isDetecting = false
+        detectionWebSocket.close()
     }
 
     private var testDebounceLastTime = 0L
@@ -211,7 +226,7 @@ class MainActivity : AppActivity(), SharedPreferences.OnSharedPreferenceChangeLi
             return
         }
 
-        if(!detectionWebSocket.isOpen || !testDebounce()) {
+        if(!detectionWebSocket.isConnected || !testDebounce()) {
             return
         }
 

@@ -16,12 +16,19 @@ import org.json.JSONException
 private const val TAG = "DetectionWebSocket"
 
 typealias DetectionCallback = (objects: MutableList<Eye5GObject>) -> Unit
+typealias ConnectionOpenedCallback = () -> Unit
+typealias ConnectionClosedCallback = () -> Unit
+typealias ConnectionErrorCallback = () -> Unit
 
 class DetectionWebSocket {
     private var ws: WebSocket? = null
-    private var detectionCallback: DetectionCallback? = null
 
-    val isOpen: Boolean
+    var detectionCallback: DetectionCallback? = null
+    var connectionOpenedCallback: ConnectionOpenedCallback? = null
+    var connectionClosedCallback: ConnectionClosedCallback? = null
+    var connectionErrorCallback: ConnectionErrorCallback? = null
+
+    val isConnected: Boolean
         get() = ws?.isOpen == true
 
     private fun receiveString(payload: String) {
@@ -49,7 +56,7 @@ class DetectionWebSocket {
                 ))
             }
 
-            detectionCallback?.let { it(objects) }
+            detectionCallback?.invoke(objects)
         } catch(e: JSONException) {
             Log.e(TAG, "Received invalid JSON response", e)
         }
@@ -63,6 +70,7 @@ class DetectionWebSocket {
         AsyncHttpClient.getDefaultInstance().websocket(url, null) { ex, socket ->
             if(ex != null) {
                 Log.e(TAG, "Failed top en WebSocket connection", ex)
+                connectionErrorCallback?.invoke()
                 return@websocket
             }
 
@@ -70,6 +78,7 @@ class DetectionWebSocket {
                 it.setClosedCallback {
                     Log.i(TAG, "WebSocket has been closed")
                     ws = null
+                    connectionClosedCallback?.invoke()
                 }
 
                 it.setStringCallback { payload ->
@@ -82,16 +91,14 @@ class DetectionWebSocket {
                     bb.recycle()
                 }
             }
+
+            connectionOpenedCallback?.invoke()
         }
     }
 
     fun close() {
         // TODO: Check how to send end-frame to close the connection properly.
         ws?.end()
-    }
-
-    fun setDetectionCallback(callback: DetectionCallback) {
-        detectionCallback = callback
     }
 
     fun send(data: ByteArray) {
