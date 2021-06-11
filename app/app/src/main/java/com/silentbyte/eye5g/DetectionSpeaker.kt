@@ -107,8 +107,8 @@ class DetectionSpeaker(private val context: Context) : Closeable {
         speak("$objectText, $locationText")
     }
 
-    fun addObjects(objects: Iterable<Eye5GObject>) {
-        if(tts.isSpeaking) {
+    fun addObjects(objects: Collection<Eye5GObject>) {
+        if(tts.isSpeaking || objects.isEmpty()) {
             return
         }
 
@@ -120,7 +120,6 @@ class DetectionSpeaker(private val context: Context) : Closeable {
             .filter { it.age < maxAge }
             .sortedWith { lhs, rhs -> objectComparator(lhs, rhs) }
             .take(maxObjectCount)
-
 
         for(location in arrayOf(
             Eye5GObjectLocation.Center,

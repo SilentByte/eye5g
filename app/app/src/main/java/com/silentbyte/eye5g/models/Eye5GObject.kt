@@ -5,8 +5,6 @@
 
 package com.silentbyte.eye5g.models
 
-import android.graphics.Rect
-import android.graphics.RectF
 import androidx.annotation.PluralsRes
 import com.silentbyte.eye5g.R
 
@@ -114,15 +112,7 @@ data class Eye5GObject(
 ) {
     companion object {
         const val CENTER_WIDTH = 0.4f
-
-        fun intersectionArea(first: RectF, second: RectF): Float {
-            val intersection = RectF(first)
-            return if(intersection.intersect(second)) {
-                intersection.width() * intersection.height()
-            } else {
-                0.0f
-            }
-        }
+        const val SIDE_WIDTH = (1 - CENTER_WIDTH) / 2
     }
 
     private val timestamp = System.nanoTime()
@@ -132,27 +122,12 @@ data class Eye5GObject(
     @PluralsRes
     val nameResId = labelMap[label]?.nameResId ?: R.plurals.speak_object_unknown
 
-    val location: Eye5GObjectLocation
+    val location: Eye5GObjectLocation = when {
+        bbox.x < SIDE_WIDTH -> Eye5GObjectLocation.Left
+        bbox.x > SIDE_WIDTH + CENTER_WIDTH -> Eye5GObjectLocation.Right
+        else -> Eye5GObjectLocation.Center
+    }
 
     val age: Float
         get() = (System.nanoTime() - timestamp).toFloat() / 1_000_000_000
-
-    init {
-        val objectRect = RectF(
-            bbox.x - bbox.width / 2.0f,
-            bbox.y - bbox.height / 2.0f,
-            bbox.x + bbox.width / 2.0f,
-            bbox.y + bbox.height / 2.0f,
-        )
-
-        val leftRect = RectF(0.0f, 0.0f, CENTER_WIDTH / 2.0f, 1.0f)
-        val centerRect = RectF(CENTER_WIDTH / 2.0f, 0.0f, CENTER_WIDTH + CENTER_WIDTH / 2.0f, 1.0f)
-        val rightRect = RectF(CENTER_WIDTH + CENTER_WIDTH / 2.0f, 0.0f, 1.0f, 1.0f)
-
-        location = arrayOf(
-            Pair(Eye5GObjectLocation.Left, intersectionArea(leftRect, objectRect)),
-            Pair(Eye5GObjectLocation.Center, intersectionArea(centerRect, objectRect)),
-            Pair(Eye5GObjectLocation.Right, intersectionArea(rightRect, objectRect)),
-        ).maxByOrNull { it.second }!!.first
-    }
 }
