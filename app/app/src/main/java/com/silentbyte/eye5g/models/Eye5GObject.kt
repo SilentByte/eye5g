@@ -113,7 +113,7 @@ data class Eye5GObject(
     val bbox: BBox,
 ) {
     companion object {
-        const val CENTER_WIDTH = 0.6f
+        const val CENTER_WIDTH = 0.4f
 
         fun intersectionArea(first: RectF, second: RectF): Float {
             val intersection = RectF(first)
