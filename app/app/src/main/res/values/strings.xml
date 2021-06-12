@@ -11,6 +11,8 @@
     <string name="settings_accessibility_header">Accessibility</string>
     <string name="settings_accessibility_locale">Language</string>
     <string name="settings_accessibility_speech_rate">Speech Rate</string>
+    <string name="settings_accessibility_visual_feedback">Visual Feedback (LEDs)</string>
+    <string name="settings_accessibility_visual_feedback_colors">Use Colors</string>
 
     <string name="camera_fragment_label">Eye5G</string>
     <string name="permission_rationale">This app requires permission to access the camera and establish a connection to the Internet in order to function properly.</string>
