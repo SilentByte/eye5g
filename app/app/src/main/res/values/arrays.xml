@@ -2,11 +2,13 @@
     <string-array name="settings_accessibility_locale_entries">
         <item>Default</item>
         <item>English</item>
+        <item>Deutsch</item>
         <item>中文（中国）</item>
     </string-array>
     <string-array name="settings_accessibility_locale_values">
         <item>default</item>
         <item>en</item>
+        <item>de</item>
         <item>zh</item>
     </string-array>
 

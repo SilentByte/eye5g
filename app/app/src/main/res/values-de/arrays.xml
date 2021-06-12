@@ -1,8 +1,8 @@
 <resources>
     <string-array name="settings_accessibility_locale_entries">
-        <item>默认</item>
+        <item>Standard</item>
         <item>English</item>
-        <item>Deutsch</item>
+        <item>German</item>
         <item>中文（中国）</item>
     </string-array>
     <string-array name="settings_accessibility_locale_values">
@@ -13,11 +13,11 @@
     </string-array>
 
     <string-array name="settings_accessibility_speech_rate_entries">
-        <item>非常快</item>
-        <item>快</item>
-        <item>普通</item>
-        <item>慢</item>
-        <item>非常快</item>
+        <item>Sehr schnell</item>
+        <item>Schnell</item>
+        <item>Normal</item>
+        <item>Langsam</item>
+        <item>Sehr langsam</item>
     </string-array>
     <string-array name="settings_accessibility_speech_rate_values">
         <item>very_fast</item>
