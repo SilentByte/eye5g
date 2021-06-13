@@ -14,6 +14,7 @@ use std::sync::{
     Mutex,
 };
 use std::thread::spawn;
+use std::time::Instant;
 
 use argh::FromArgs;
 use serde::Serialize;
@@ -145,13 +146,16 @@ fn handle_connection(
             Message::Binary(message) => {
                 log::info!("Received binary message, running object detection");
 
+                let start_time = Instant::now();
                 let image = image::load_from_memory(&message)?.to_rgb8();
                 let detections = {
                     // TODO: Pass args.
                     (*network.lock().unwrap()).detect_objects(&image)
                 };
+                let duration = start_time.elapsed();
 
                 log::debug!("{:#?}", detections);
+                log::debug!("Inference took {:.4}s", duration.as_secs_f64());
 
                 ws.write_message(Message::Text(serde_json::to_string(&detections).unwrap()))?;
             }
