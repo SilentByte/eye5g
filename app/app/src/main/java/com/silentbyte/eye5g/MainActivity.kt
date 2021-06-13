@@ -24,6 +24,7 @@ import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
 import java.io.ByteArrayOutputStream
 
 private const val TAG = "MainActivity"
+private const val INFERENCE_IMAGE_SIZE = 608
 
 class MainActivity : AppActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
     companion object {
@@ -238,7 +239,10 @@ class MainActivity : AppActivity(), SharedPreferences.OnSharedPreferenceChangeLi
         Log.e(TAG, "Sending frame for detection.")
         render()?.let { bitmap ->
             ByteArrayOutputStream().use { stream ->
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream)
+                Bitmap
+                    .createScaledBitmap(bitmap, INFERENCE_IMAGE_SIZE, INFERENCE_IMAGE_SIZE, true)
+                    .compress(Bitmap.CompressFormat.JPEG, 90, stream)
+
                 detectionWebSocket.send(stream.toByteArray())
             }
         }
