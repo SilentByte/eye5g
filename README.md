@@ -14,7 +14,7 @@ This repository represents our submission for the [5G Edge Computing Challenge w
 
 ## Inspiration
 
-An estimated 100 million people worldwide have moderate or severe distance vision impairment or blindness [[1]](https://www.who.int/news/item/27-05-2021-global-eye-care-targets-endorsed-by-member-states-at-the-74th-world-health-assembly). It is important to understand that blindness is a spectrum and each person's experience is unique. Visual impairments include blurry vision, tunnel vision, difficulties with depth perception or object detection, etc. Some people are left with only light perception or are completely blind.
+An estimated 100 million people worldwide have moderate or severe distance vision impairment or blindness [[1]](https://www.who.int/news/item/27-05-2021-global-eye-care-targets-endorsed-by-member-states-at-the-74th-world-health-assembly). It is important to understand that blindness is a spectrum [[2]](https://cnib.ca/en/sight-loss-info/blindness/what-blindness) and each person's experience is unique. Visual impairments include blurry vision, tunnel vision, difficulties with depth perception or object detection, etc. Some people are left with only light perception or are completely blind.
 
 We have decided to investigate potential solutions to alleviate symptoms of vision impairment and to develop a system that will be submitted to the aforementioned challenge.
 
