@@ -96,3 +96,53 @@ We are aiming to further improve verbal object announcements and make them even 
 
 Also, we would like to improve and properly integrate the wearable IoT device with the app so that they can communicate with each other.
 
+
+## Development & Building
+
+### Server & ML Inference
+
+The content in the `server/` folder is a Rust project that can be built by running `cargo build --release`. The binary requires access to the YOLOv4 model weights that can be downloaded here: https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
+
+The folder contains two convenience scripts:
+
+1) `./download_weights.sh` will automatically download the model weights if they have not been downloaded before.
+2) `./dev_server.sh` automatically downloads the model weights, builds the Rust project using Cargo, and executes the server with a default configuration listening on `0.0.0.0:9000`.
+
+The server binary accepts the following flags:
+
+```
+Usage: eye5g_server [--host <host>] [--port <port>] --model-cfg <model-cfg> --model-labels <model-labels> --model-weights <model-weights> [--objectness-threshold <objectness-threshold>] [--class-prob-threshold <class-prob-threshold>]
+
+Eye5G Server.
+
+Options:
+  --host            the hostname on which the server listens.
+  --port            the server's port.
+  --model-cfg       the model configuration file (*.cfg).
+  --model-labels    the label definition file (*.names).
+  --model-weights   the model weights file (*.weights).
+  --objectness-threshold
+                    the objectness threshold (default: 0.9).
+  --class-prob-threshold
+                    the class probability threshold (default 0.9).
+  --help            display usage information
+```
+
+If you would like to build Eye5G without GPU support, modify `Cargo.toml` and remove the Cuda and CudNN features.
+
+
+#### Dependencies
+
+The following dependencies are required to build Eye5G:
+
+* Build essentials
+* cmake
+* Clang
+* NVidia Cuda & CudNN.
+
+On AWS EC2 G4, installing `nvidia-toolkit` simplifies the process.
+
+
+## Android App
+
+The Eye5G app is located in the `app/` folder and is set up as an Android Studio project. Once opened in Android Studio, simply build and run the project. Ensure that Gradle has been synchronized correctly and that it has automatically downloaded all dependencies successfully.
