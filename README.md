@@ -131,6 +131,11 @@ Options:
 If you would like to build Eye5G without GPU support, modify `Cargo.toml` and remove the Cuda and CudNN features.
 
 
+#### Test Client
+
+Once the server is running, it can be tested using the Python test client located here: `server/test_client/test_client.py`. Run `python test_client.py test_image.jpg` to send the specified test image on which the inference is to be performed by the server. The output will be returned as JSON and printed in the terminal.
+
+
 #### Dependencies
 
 The following dependencies are required to build Eye5G:
